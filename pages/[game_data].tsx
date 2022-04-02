@@ -1,11 +1,11 @@
 import type { NextPage } from 'next'
-import Link from 'next/link'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import Board from '../components/Board'
 import Keyboard from '../components/Keyboard'
 import Message from '../components/Message'
+import Modal from '../components/Modal'
 import dictionary from '../functions/dictionary'
 import { decrypt } from '../functions/cypher'
 import polishAlphabet from '../functions/polish_alphabet'
@@ -17,7 +17,6 @@ const Home: NextPage = () => {
     word = decrypt(router.query.game_data)
   }
 
-  const [message, setMessage] = useState('')
   const [board, setBoard] = useState([
     ['', '', '', '', ''],
     ['', '', '', '', ''],
@@ -34,10 +33,13 @@ const Home: NextPage = () => {
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
   ])
+  const [message, setMessage] = useState('')
   const [attempt, setAttempt] = useState(0)
   const [iterator, setIterator] = useState(0)
   const [win, setWin] = useState(false)
+  const [modal, setModal] = useState('')
   const [keyboardColors, setKeyboardColors] = useState<{ [index: string]: number }>({})
+  const [shake, setShake] = useState(false)
 
   const checkWord = (triedWord: string) => {
     let correctLetters = 0
@@ -57,7 +59,7 @@ const Home: NextPage = () => {
     if (correctLetters === 5) {
       setWin(true)
       const winMessages = ['Ogniście 🔥', 'Detektywistycznie 🕵️‍♀️', 'Nieźle 😎', 'Masz to coś 🔍', 'Nieziemsko 🚀', 'Kosmos 👩🏿‍🚀', 'Mistrzowsko 🏅']
-      setMessage(winMessages[Math.round(Math.random() * winMessages.length)])
+      setModal(winMessages[Math.round(Math.random() * winMessages.length)])
       return
     }
 
@@ -80,6 +82,11 @@ const Home: NextPage = () => {
           }
         }
       }
+    }
+
+    if(attempt == 5) {
+      const loseMessages = ['Dobra próba','Niezła próba']
+      setModal(loseMessages[Math.round(Math.random() * loseMessages.length)])
     }
 
     setMessage('')
@@ -105,6 +112,10 @@ const Home: NextPage = () => {
             setAttempt(attempt + 1)
           } else {
             setMessage('Słowa nie ma w słowniku')
+            setShake(true)
+            setTimeout(() => {
+              setShake(false)
+            }, 100)
           }
         }
       } else if (letter === 'Back') {
@@ -133,15 +144,10 @@ const Home: NextPage = () => {
         <meta name="description" content="Zagraj w literalnie na wymyślonych słowach" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <Link href='/'>
-        <button className="fixed top-1.5 left-1.5 text-sm p-1 px-2 bg-neutral-500 rounded hover:bg-green-500">
-          Nowe Słowo
-        </button>
-      </Link>
-      {message ? <Message text={message} setMessage={setMessage} winStatus={win} /> : <></>}
+      {message ? <Message text={message} setMessage={setMessage}/> : <></>}
+      {modal ? <Modal text={modal} word={word} setModal={setModal} attempt={attempt} colors={colors}/> : <></>}
       <div className="flex justify-center mt-12">
-        <Board board={board} colors={colors} />
+        <Board board={board} colors={colors} attempt={attempt} shake={shake}/>
       </div>
       <Keyboard handleKeyboardClicked={handleKeyboardClicked} keyboardColors={keyboardColors} />
     </div>

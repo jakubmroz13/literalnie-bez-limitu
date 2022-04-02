@@ -14,7 +14,7 @@ const Home: NextPage = () => {
     if (word) {
       if (word.length === 5) {
         if (dictionary.has(word.toLowerCase())) {
-          navigator.clipboard.writeText('https://literalniedlaznajomych/' + encrypt(word.toLowerCase()))
+          navigator.clipboard.writeText('localhost:3000/' + encrypt(word.toLowerCase()))
           setMessage('')
           setLinkCopied(true)
         } else {
