@@ -18,7 +18,7 @@ const Home: NextPage = () => {
           setMessage('')
           setLinkCopied(true)
         } else {
-          setMessage('Słowa nie ma w bazie')
+          setMessage('Słowa nie ma w słowniku')
         }
       } else {
         setMessage('Słowo musi być 5-literowe')
