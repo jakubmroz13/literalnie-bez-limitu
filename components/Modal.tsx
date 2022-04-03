@@ -7,7 +7,8 @@ const Modal: React.FC<{
   setModal: Dispatch<SetStateAction<string>>;
   attempt: number;
   colors: number[][];
-}> = ({ text, word, setModal, attempt, colors }) => {
+  setMessage:  Dispatch<SetStateAction<string>>;
+}> = ({ text, word, setModal, attempt, colors, setMessage }) => {
 
   const copyResults = () => {
     let result = `Literalnie ${attempt}/6\n`
@@ -24,6 +25,7 @@ const Modal: React.FC<{
       result += '\n';
     }
     navigator.clipboard.writeText(result)
+    setMessage('Wynik został skopiowany')
   }
 
   return (

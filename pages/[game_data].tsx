@@ -17,6 +17,7 @@ const Home: NextPage = () => {
     word = decrypt(router.query.game_data)
   }
 
+  const [message, setMessage] = useState('')
   const [board, setBoard] = useState([
     ['', '', '', '', ''],
     ['', '', '', '', ''],
@@ -33,14 +34,12 @@ const Home: NextPage = () => {
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
   ])
-  const [message, setMessage] = useState('')
   const [attempt, setAttempt] = useState(0)
   const [iterator, setIterator] = useState(0)
   const [win, setWin] = useState(false)
   const [modal, setModal] = useState('')
   const [keyboardColors, setKeyboardColors] = useState<{ [index: string]: number }>({})
   const [shake, setShake] = useState(false)
-
   const checkWord = (triedWord: string) => {
     let correctLetters = 0
     let tmp = word.split('')
@@ -88,8 +87,6 @@ const Home: NextPage = () => {
       const loseMessages = ['Dobra próba','Niezła próba']
       setModal(loseMessages[Math.round(Math.random() * loseMessages.length)])
     }
-
-    setMessage('')
   }
 
   const handleKeyboardClicked = (letter: string) => {
@@ -129,7 +126,6 @@ const Home: NextPage = () => {
           board[attempt][iterator] = letter
           setBoard([...board])
           setIterator(iterator + 1)
-          setMessage('')
         } else {
           setMessage('Kliknij Enter')
         }
@@ -144,8 +140,8 @@ const Home: NextPage = () => {
         <meta name="description" content="Zagraj w literalnie na wymyślonych słowach" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {modal ? <Modal text={modal} word={word} setModal={setModal} attempt={attempt} colors={colors} setMessage={setMessage}/> : <></>}
       {message ? <Message text={message} setMessage={setMessage}/> : <></>}
-      {modal ? <Modal text={modal} word={word} setModal={setModal} attempt={attempt} colors={colors}/> : <></>}
       <div className="flex justify-center mt-12">
         <Board board={board} colors={colors} attempt={attempt} shake={shake}/>
       </div>
