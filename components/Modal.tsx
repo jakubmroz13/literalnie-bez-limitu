@@ -11,7 +11,7 @@ const Modal: React.FC<{
 }> = ({ text, word, setModal, attempt, colors, setMessage }) => {
 
   const copyResults = () => {
-    let result = `Literalnie ${attempt}/6\n`
+    let result = `Literalnie Bez Limitu ${attempt}/6\n`
     for (let i = 0; i < attempt; ++i) {
       for (let j = 0; j < 5; ++j) {
         if (colors[i][j] === 1) {
