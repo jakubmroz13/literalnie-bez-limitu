@@ -58,7 +58,9 @@ const Home: NextPage = () => {
     if (correctLetters === 5) {
       setWin(true)
       const winMessages = ['Ogniście 🔥', 'Detektywistycznie 🕵️‍♀️', 'Nieźle 😎', 'Masz to coś 🔍', 'Nieziemsko 🚀', 'Kosmos 👩🏿‍🚀', 'Mistrzowsko 🏅']
-      setModal(winMessages[Math.round(Math.random() * winMessages.length)])
+      setTimeout(() => {
+        setModal(winMessages[Math.round(Math.random() * winMessages.length)])
+      }, 500)
       return
     }
 
@@ -83,9 +85,11 @@ const Home: NextPage = () => {
       }
     }
 
-    if(attempt == 5) {
-      const loseMessages = ['Dobra próba','Niezła próba']
-      setModal(loseMessages[Math.round(Math.random() * loseMessages.length)])
+    if (attempt == 5) {
+      const loseMessages = ['Dobra próba', 'Niezła próba']
+      setTimeout(() => {
+        setModal(loseMessages[Math.round(Math.random() * loseMessages.length)])
+      }, 500)
     }
   }
 
@@ -140,10 +144,10 @@ const Home: NextPage = () => {
         <meta name="description" content="Zagraj w literalnie na wymyślonych słowach" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {modal ? <Modal text={modal} word={word} setModal={setModal} attempt={attempt} colors={colors} setMessage={setMessage}/> : <></>}
-      {message ? <Message text={message} setMessage={setMessage}/> : <></>}
+      {modal ? <Modal text={modal} word={word} setModal={setModal} attempt={attempt} colors={colors} setMessage={setMessage} /> : <></>}
+      {message ? <Message text={message} setMessage={setMessage} /> : <></>}
       <div className="flex justify-center mt-12">
-        <Board board={board} colors={colors} attempt={attempt} shake={shake}/>
+        <Board board={board} colors={colors} attempt={attempt} shake={shake} />
       </div>
       <Keyboard handleKeyboardClicked={handleKeyboardClicked} keyboardColors={keyboardColors} />
     </div>
