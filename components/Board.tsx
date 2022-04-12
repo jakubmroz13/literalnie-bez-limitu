@@ -16,7 +16,7 @@ const Board: React.FC<{ board: string[][], colors: number[][], attempt: number, 
               
               return (
                 <div key={key2} className={
-                  `w-14 h-14 flex items-center justify-center text-2xl m-0.5 text-center
+                  `h-[7vh] w-[7vh] max-h-[15vw] max-w-[15vw] m-[.5vh] flex justify-center items-center text-xl
                   ${colorNumber === 0 ? border : color}`
                 }>{e}</div>
               )

@@ -10,9 +10,9 @@ const Message: React.FC<{
   }, 1700)
 
   return (
-    <div className="fixed flex justify-center w-screen top-11">
-      <div className={`fixed p-2 bg-white z-100 text-center text-xl rounded text-black`}>
-        <span className="text-center">{text}</span>
+    <div className="fixed flex justify-center w-screen top-2">
+      <div className={`p-2 bg-white z-100 rounded`}>
+        <span className="text-center text-xl text-black">{text}</span>
       </div>
     </div>
   )

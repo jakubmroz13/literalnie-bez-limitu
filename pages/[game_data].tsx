@@ -59,7 +59,11 @@ const Home: NextPage = () => {
       setWin(true)
       const winMessages = ['Ogniście 🔥', 'Detektywistycznie 🕵️‍♀️', 'Nieźle 😎', 'Masz to coś 🔍', 'Nieziemsko 🚀', 'Kosmos 👩🏿‍🚀', 'Mistrzowsko 🏅']
       setTimeout(() => {
-        setModal(winMessages[Math.round(Math.random() * winMessages.length)])
+        if(attempt === 5) {
+          setModal('Uff 🚀') 
+        } else {
+          setModal(winMessages[Math.round(Math.random() * winMessages.length)])
+        }
       }, 500)
       return
     }
@@ -138,7 +142,7 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div>
+    <div className="relative h-[95vh] flex flex-col items-center max-w-2xl m-auto">
       <Head>
         <title>Literalnie bez limitu</title>
         <meta name="description" content="Zagraj w literalnie na wymyślonych słowach" />
@@ -146,10 +150,12 @@ const Home: NextPage = () => {
       </Head>
       {modal ? <Modal text={modal} word={word} setModal={setModal} attempt={attempt} colors={colors} setMessage={setMessage} /> : <></>}
       {message ? <Message text={message} setMessage={setMessage} /> : <></>}
-      <div className="flex justify-center mt-12">
+      <div className="flex justify-center h-[48vh] w-full mt-[5vh]">
         <Board board={board} colors={colors} attempt={attempt} shake={shake} />
       </div>
-      <Keyboard handleKeyboardClicked={handleKeyboardClicked} keyboardColors={keyboardColors} />
+      <div className="absolute bottom-0 flex flex-col justify-center h-[30vh] w-full">
+        <Keyboard handleKeyboardClicked={handleKeyboardClicked} keyboardColors={keyboardColors} />
+      </div>
     </div>
   )
 }

@@ -1,7 +1,7 @@
 const Layout: React.FC = ({ children }) => {
   return (
     <div>
-      <header className="p-1 text-2xl text-center border-b border-neutral-500">Literalnie Bez Limitu</header>
+      <header className="h-[5vh] md:text-xl flex justify-center items-center border-b border-neutral-500">Literalnie Bez Limitu</header>
       <main>{children}</main>
     </div>
   )
