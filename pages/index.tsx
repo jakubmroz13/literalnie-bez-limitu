@@ -38,11 +38,12 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div className="flex flex-col items-center max-w-lg m-auto">
+    <div className="flex flex-col items-center justify-center h-[75vh] max-w-lg m-auto">
       <Head>
         <title>Literalnie bez limitu</title>
-        <meta name="description" content="Zagraj w literalnie na wymyślonych słowach" />
+        <meta name="description" content="Zagraj w Literalnie Bez Limitu. Wylosuj słowo dla siebie lub wymyśl słowo i rzuć wyzwanie znajomemu." />
         <link rel="icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
 
       {message ? <Message text={message} setMessage={setMessage} /> : <></>}
